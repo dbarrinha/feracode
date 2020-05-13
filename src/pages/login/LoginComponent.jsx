@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { FormInput, InputCustom, FormLabel, ButtomCustom, SpanError } from './styles';
-import { signIn } from '../../auth'
+import { signIn } from '../../services/auth'
 import { useHistory } from "react-router-dom";
 
-export default function CadastroComponent(props) {
+export default function LoginComponent(props) {
   const { register, handleSubmit, errors } = useForm()
   let [isError, setIsError] = useState(false)
   let hist = useHistory()
@@ -12,12 +12,10 @@ export default function CadastroComponent(props) {
     setIsError(false)
     signIn(data).then(res => {
       console.log(res)
-    })
-    /*if (res) {
-      hist.push("/list");
-    } else {
+      hist.push("/home");
+    }).catch(err =>{
       setIsError(true)
-    }*/
+    })
   }
 
   return (
