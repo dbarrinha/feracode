@@ -1,21 +1,59 @@
 import firebase from '../../firebase'
-export async function signIn({ email, password }) {
+export const signIn = async ({ email, password }) => {
     let user = {}
     try {
-        user = await firebase.auth().signInWithEmailAndPassword(email, password)
+        await firebase.auth().signInWithEmailAndPassword(email, password)
+        user = firebase.auth().currentUser;
         console.log(user)
     } catch (error) {
         return error
     }
     return user;
 }
-export const signUp = () => {
 
+export const signUp = async ({ email, password, displayName, photoURL }) => {
+    let user = {}
+    try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password)
+        user = firebase.auth().currentUser;
+        await user.updateProfile({
+            displayName: displayName,
+            photoURL: photoURL
+        })
+        console.log(user)
+    } catch (error) {
+        return({
+            success: false,
+            response: {}
+        })
+    }
+    return({
+        success: true,
+        response: user
+    })
 }
 
-export const uploadImage = file => {
-    var storageRef = firebase.storage().ref();
-    storageRef.put(file).then(function (snapshot) {
-        console.log(snapshot);
-    });
+export const signOut = async () => {
+    let user = {}
+    try {
+        await firebase.auth().signOut()
+        localStorage.removeItem("User@testeferacode")
+    } catch (error) {
+        return error
+    }
+    return user;
+}
+
+
+export const uploadImage = async file => {
+    var storageRef = firebase.storage().ref(`profilePic/${file.file.name}`);
+    //var imagesRef = storageRef.child(file.name);
+    let response = {}
+    try {
+        await storageRef.put(file.file)
+        response = await storageRef.getDownloadURL();
+    } catch (error) {
+        return error
+    }
+    return response
 }

@@ -12,6 +12,7 @@ export default function LoginComponent(props) {
     setIsError(false)
     signIn(data).then(res => {
       console.log(res)
+      localStorage.setItem("User@testeferacode",JSON.stringify(res))
       hist.push("/home");
     }).catch(err =>{
       setIsError(true)

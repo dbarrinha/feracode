@@ -1,32 +1,67 @@
-import React,{useState} from 'react';
-import {useForm} from 'react-hook-form'
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form'
 import { FormInput, InputCustom, FormLabel, ButtomCustom, ButtomLogin, SpanError } from './styles';
 import InputMask from 'react-input-mask';
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { uploadImage, signUp } from '../../services/auth'
+import Upload from '../../components/UploadComponent'
+import Filelist from '../../components/FileList'
+import uniqueId from 'lodash/uniqueId'
+import filesize from 'filesize'
+import { useHistory } from "react-router-dom";
 
 export default function CadastroComponent(props) {
 
   const { register, handleSubmit, errors } = useForm()
+  let hist = useHistory()
   let [isError, setIsError] = useState(false)
+  const [uploadFiles, setUploadFiles] = useState([])
   const onSubmit = async data => {
     setIsError(false)
-    //caadastra
-    /*if (res) {
-      props.goToLogin()
-    } else {
+    let url = ""
+    if (uploadFiles.length > 0) {
+      url = await uploadImage(uploadFiles[0])
+    }
+
+    let usuario = data
+    usuario.photoURL = url
+    signUp(usuario).then(res => {
+      console.log(res)
+      if(res.success){
+        localStorage.setItem("User@testeferacode",JSON.stringify(res))
+        hist.push("/home");
+      }else{
+        setIsError(true)
+      }
+    }).catch(err =>{
       setIsError(true)
-    }*/
+    })
+  }
+
+  const handleUpload = files => {
+    const uploadFiles = files.map(file => ({
+      file,
+      id: uniqueId(),
+      name: file.name,
+      readableSize: filesize(file.size),
+      preview: URL.createObjectURL(file),
+      progress: 0,
+      uploaded: false,
+      error: false,
+      url: null,
+    }))
+    setUploadFiles(uploadFiles)
   }
 
   return (
-    <div style={{ paddingTop: 50, paddingRight: 20, paddingLeft: 40 }}  className="animated fadeIn " >
+    <div style={{ paddingTop: 50, paddingRight: 20, paddingLeft: 40 }} className="animated fadeIn " >
       <h2 style={{ color: '#999999', fontSize: 30 }}>FeraCode Cadastro</h2>
       <form style={{ marginTop: 10, marginBottom: 10 }} onSubmit={handleSubmit(onSubmit)}>
-      {isError && <h5 style={{ color: '#e67' }}>Email Já Cadastrado!</h5>}
+        {isError && <h5 style={{ color: '#e67' }}>Email Já Cadastrado!</h5>}
         <FormInput>
           <FormLabel>Nome Completo</FormLabel>
-          <InputCustom name="nome" ref={register({ required: true })} />
-          {errors.nome && <SpanError>Este campo é obrigatório</SpanError>}
+          <InputCustom name="displayName" ref={register({ required: true })} />
+          {errors.displayName && <SpanError>Este campo é obrigatório</SpanError>}
         </FormInput>
 
         <FormInput>
@@ -36,11 +71,19 @@ export default function CadastroComponent(props) {
         </FormInput>
 
         <FormInput>
-          <FormLabel>CPF</FormLabel>
-          <InputMask mask="999.999.999-99" >
-          {(inputProps) => <InputCustom name="cpf" ref={register({ required: true })} />}
-          </InputMask>
-          {errors.cpf && <SpanError>Este campo é obrigatório</SpanError>}
+          <FormLabel>Senha</FormLabel>
+          <InputCustom name="password" ref={register({ required: true })} />
+          {errors.password && <SpanError>Este campo é obrigatório</SpanError>}
+        </FormInput>
+
+        <FormInput>
+          <FormLabel>Foto de Perfil</FormLabel>
+          <Upload multiple={false} onlyImage={true} onUpload={handleUpload} />
+          {!!uploadFiles.length && (
+            <div>
+              <Filelist files={uploadFiles} />
+            </div>
+          )}
         </FormInput>
 
         <div style={{ display: 'flex', width: 300, flexDirection: 'row', justifyContent: 'space-between' }}>

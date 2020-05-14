@@ -11,7 +11,7 @@ export const BackGroundImagem = styled.div`
     height: 100%;
     resize: vertical;
     background-position: center;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-image: url(${require('../../assets/imgs/logo.jpg')});
 `;
@@ -19,7 +19,7 @@ export const BackGroundImagem = styled.div`
 export const OverlayImagem = styled.div`
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to top, rgba(64,200,244,0.1), rgba(33, 121, 181,0.8));
+    background-image: linear-gradient(to top, rgba(64,200,244,0.0), rgba(33, 121, 181,0.7));
 `;
 
 export const ContainerAuth = styled.div`

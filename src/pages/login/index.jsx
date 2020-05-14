@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Container, BackGroundImagem, ContainerAuth, OverlayImagem } from './styles';
 import LoginComponent from './LoginComponent'
 import CadastroComponent from './CadastroComponent'
-
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
-
+    let hist = useHistory()
     const [isLogin, setIsLogin] = useState(true)
 
     useEffect(() => {
         let usuario = localStorage.getItem("User@testeferacode")
         if (usuario) {
-            this.props.history.push('/')
+            hist.push('/home')
         }
     }, [])
 
