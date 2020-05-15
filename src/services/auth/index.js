@@ -47,7 +47,18 @@ export const signOut = async () => {
 
 export const uploadImage = async file => {
     var storageRef = firebase.storage().ref(`profilePic/${file.file.name}`);
-    //var imagesRef = storageRef.child(file.name);
+    let response = {}
+    try {
+        await storageRef.put(file.file)
+        response = await storageRef.getDownloadURL();
+    } catch (error) {
+        return error
+    }
+    return response
+}
+
+export const uploadImageCover = async file => {
+    var storageRef = firebase.storage().ref(`coverPic/${file.file.name}`);
     let response = {}
     try {
         await storageRef.put(file.file)
