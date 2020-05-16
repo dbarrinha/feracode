@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { signOut } from '../../services/auth'
-// import { Container } from './styles';
+import { Container,Content,CoverPic } from './styles';
+import Sidebar from '../../components/Sidebar';
+import FeedArea from '../../components/FeedArea';
+import TrendsArea from '../../components/TrendsArea';
 import { useHistory } from "react-router-dom";
 
 export default function Home(props) {
@@ -18,19 +21,22 @@ export default function Home(props) {
         })
     }
 
-    if (!user) {
+   /* if (!user) {
         return (
             <div>
                 <h1>Carregando...</h1>
             </div>
         )
-    }
+    }*/
+
     return (
-        <div>
-            <h1>Home</h1>
-            <h6>Nome: {user.displayName}</h6>
-            <img src={user.photoURL}></img>
-            <button onClick={sair}>Sair</button>
-        </div>
+        <Content>
+            <CoverPic></CoverPic>
+            <Container>
+                <Sidebar />
+                <FeedArea />
+                <TrendsArea />
+            </Container>
+        </Content>
     );
 }
