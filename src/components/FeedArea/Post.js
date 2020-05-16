@@ -1,34 +1,28 @@
 import React from 'react';
-import { Post, Avatar, ProfileContent, UserNameText, ReactionIcon,ReactionText } from './styles';
+import { Post, Avatar, ProfileContent, UserNameText, ReactionIcon, ReactionText, UserEmailText } from './styles';
 import { AiOutlineHeart, AiOutlineRetweet, AiOutlineUpload, AiOutlineMessage } from 'react-icons/ai';
 
 
 function PostComponent({ post }) {
     return (
         <Post>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                height: 50
-            }}>
+            <div style={{ display: 'flex', flexDirection: 'row', height: 50 }}>
                 <ProfileContent>
                     <Avatar src={require("../../assets/imgs/profile.png")} />
                 </ProfileContent>
-                <UserNameText>Danilo Falcão barrinha</UserNameText>
+                <UserNameText>
+                    Danilo Falcão barrinha
+                <UserEmailText style={{ margin: 0 }}>
+                        dbarrinha@hotmail.com
+                </UserEmailText>
+                </UserNameText>
             </div>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-            }}>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <p>
                     Tudo que acontece na nossa vida é essencial. Até os erros trazem a possibilidade do aprendizado.
                 </p>
             </div>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around'
-            }}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                 <ReactionIcon>
                     <AiOutlineMessage />
                     <ReactionText>64</ReactionText>

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, PostForm, PostList, PostFormFooter, TextArea, ButtonForm} from './styles';
+import React, { useState } from 'react';
+import { Container, PostForm, PostList, PostFormFooter, TextArea, ButtonForm } from './styles';
 import Post from './Post'
 
 function FeedArea() {
@@ -15,7 +15,7 @@ function FeedArea() {
         <Post />
         <Post />
         <Post />
-        
+
       </PostList>
     </Container>
   );

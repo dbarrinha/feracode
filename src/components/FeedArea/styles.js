@@ -6,7 +6,7 @@ export const Container = styled.div`
     padding: 20px;
     float: left;
     overflow: scroll;
-    height: calc(100%  );
+    height: calc(100%  - 100px);
     justify-content: center;
 
     ::-webkit-scrollbar {
@@ -97,6 +97,13 @@ export const ProfileContent = styled.div`
 export const UserNameText = styled.span`
     font-weight: bold;
     font-size:16px;
+`;
+
+export const UserEmailText = styled.p`
+    font-weight: bold;
+    font-size:12px;
+    color: rgb(0,0,0,0.3);
+    margin: 0px;
 `;
 
 export const ReactionIcon = styled.div`
