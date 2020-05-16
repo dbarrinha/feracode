@@ -3,9 +3,11 @@ import { Post, Avatar, ProfileContent, UserNameText, ReactionIcon, ReactionText,
 import { AiOutlineHeart, AiOutlineRetweet, AiOutlineUpload, AiOutlineMessage } from 'react-icons/ai';
 
 
-function PostComponent({ post }) {
+function PostComponent({ post,index }) {
+
+    let classe = `animated fadeIn delay-${index > 9 ? 9 : index}00ms`
     return (
-        <Post>
+        <Post className={classe} key={index}>
             <div style={{ display: 'flex', flexDirection: 'row', height: 50 }}>
                 <ProfileContent>
                     <Avatar src={require("../../assets/imgs/profile.png")} />

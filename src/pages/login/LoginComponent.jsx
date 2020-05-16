@@ -3,15 +3,19 @@ import { useForm } from 'react-hook-form'
 import { FormInput, InputCustom, FormLabel, ButtomCustom, SpanError } from './styles';
 import { signIn } from '../../services/auth'
 import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import * as actionsUser from '../../redux/actions/userAction';
 
 export default function LoginComponent(props) {
   const { register, handleSubmit, errors } = useForm()
   let [isError, setIsError] = useState(false)
   let hist = useHistory()
+  const dispatch = useDispatch();
+
   const onSubmit = async data => {
     setIsError(false)
     signIn(data).then(res => {
-      console.log(res)
+      dispatch(actionsUser.create(res));
       localStorage.setItem("User@testeferacode",JSON.stringify(res))
       hist.push("/home");
     }).catch(err =>{

@@ -19,6 +19,8 @@ export const Container = styled.div`
 export const ProfileContent = styled.div`
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 `;
 
 export const Avatar = styled.img`
@@ -27,6 +29,7 @@ export const Avatar = styled.img`
     position: relative;
     width: 124px;
     height: 124px;
+    border-radius: 20px;
 
     @media (max-width: 768px) {
         width: 80px;
@@ -34,8 +37,15 @@ export const Avatar = styled.img`
     }
 `;
 
+export const UserNameText = styled.span`
+    font-weight: bold;
+    font-size:14px;
+    text-transform: uppercase;
+    color: rgb(0,0,0,0.5)
+`;
+
 export const Nav = styled.ul`
-    margin: 0px;
+    margin-top: 20px;
     padding-left: 10px;
     padding-right: 10px;
     
@@ -43,15 +53,18 @@ export const Nav = styled.ul`
 
 export const NavItem = styled.li`
     list-style-type: none;
+    margin-bottom:15px;
 `;
 
 export const NavButtom = styled.div`
     display: flex; 
     font-weight: bold;
+    padding-left: 20px;
+    padding-right: 40px;
     font-size: 20px;
     border-radius: 30px;
     background-color:  transparent;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     transition: 0.3s;
 

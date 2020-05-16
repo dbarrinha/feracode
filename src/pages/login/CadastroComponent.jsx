@@ -9,13 +9,17 @@ import Filelist from '../../components/FileList'
 import uniqueId from 'lodash/uniqueId'
 import filesize from 'filesize'
 import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import * as actionsUser from '../../redux/actions/userAction';
 
 export default function CadastroComponent(props) {
 
   const { register, handleSubmit, errors } = useForm()
   let hist = useHistory()
+  const dispatch = useDispatch();
   let [isError, setIsError] = useState(false)
   const [uploadFiles, setUploadFiles] = useState([])
+
   const onSubmit = async data => {
     setIsError(false)
     let url = ""
@@ -27,13 +31,14 @@ export default function CadastroComponent(props) {
     usuario.photoURL = url
     signUp(usuario).then(res => {
       console.log(res)
-      if(res.success){
-        localStorage.setItem("User@testeferacode",JSON.stringify(res))
+      if (res.success) {
+        dispatch(actionsUser.create(res));
+        localStorage.setItem("User@testeferacode", JSON.stringify(res))
         hist.push("/home");
-      }else{
+      } else {
         setIsError(true)
       }
-    }).catch(err =>{
+    }).catch(err => {
       setIsError(true)
     })
   }

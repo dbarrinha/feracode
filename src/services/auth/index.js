@@ -1,4 +1,5 @@
 import firebase from '../../firebase'
+
 export const signIn = async ({ email, password }) => {
     let user = {}
     try {

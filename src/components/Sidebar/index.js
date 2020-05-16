@@ -1,16 +1,34 @@
 import React from 'react';
-import { Container, ProfileContent, Avatar, Nav, NavItem, NavButtom, NavIcon, NavText } from './styles';
+import { Container, ProfileContent, Avatar, Nav, NavItem, NavButtom, NavIcon, NavText,UserNameText } from './styles';
 import { useHistory, useLocation } from "react-router-dom";
+import { signOut } from '../../services/auth'
 import rotas from '../../routes'
+import { AiOutlineLogout } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux';
+import * as actionsUser from '../../redux/actions/userAction';
 
 function Sidebar() {
   let hist = useHistory()
   let location = useLocation()
-  console.log(location)
+  const dispatch = useDispatch()
+  const user = useSelector(state => state.user.user);
+  const sair = () => {
+    signOut().then(res => {
+      dispatch(actionsUser.destroy());
+      localStorage.removeItem("User@testeferacode")
+      hist.push('/')
+    }).catch(err => {
+      //trata erro de logout
+    })
+  }
+
   return (
     <Container>
       <ProfileContent>
-        <Avatar src={require("../../assets/imgs/profile.png")} />
+        <Avatar
+          src={!user.photoURL ? require("../../assets/imgs/profile.png"):  user.photoURL}
+        />
+        <UserNameText>{user.displayName}</UserNameText>
       </ProfileContent>
 
       <Nav>
@@ -26,6 +44,12 @@ function Sidebar() {
             );
           })
         }
+        <NavItem>
+          <NavButtom isCurrentPath={false} onClick={() => sair()}>
+            <NavIcon><AiOutlineLogout size={36} /></NavIcon>
+            <NavText>Sair</NavText>
+          </NavButtom>
+        </NavItem>
       </Nav>
     </Container>
   );
