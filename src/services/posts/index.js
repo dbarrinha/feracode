@@ -5,11 +5,9 @@ export const newPost = async post => {
         username: name,
         photo: email,
         text: imageUrl,
-        likes: 0,
-
     });
 }
 
-export const newPost = async ({ email, password }) => {
+export const getPosts = async () => {
 
 }

@@ -3,11 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
     position: relative;
     background-color: #fff;
+    padding-top: 10px;
     top:-100px;
-    bottom: 0px;
     width: 225px;
+    height: calc(100% + 100px );
     border-radius: 0px 10px 0px 0px;
     transition: 1s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0px 10px 0 rgba(0, 0, 0, 0.05);
 
     @media (max-width: 768px) {
         width: 100px;
@@ -36,6 +38,7 @@ export const Nav = styled.ul`
     margin: 0px;
     padding-left: 10px;
     padding-right: 10px;
+    
 `;
 
 export const NavItem = styled.li`
@@ -47,12 +50,14 @@ export const NavButtom = styled.div`
     font-weight: bold;
     font-size: 20px;
     border-radius: 30px;
-    background-color: ${props => props.isCurrentPath ? "rgb(0,0,0,0.1)":  "transparent"};
+    background-color:  transparent;
     justify-content: center;
     align-items: center;
+    transition: 0.3s;
 
     :hover {
         background-color: rgb(0,0,0,0.1);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0px 10px 0 rgba(0, 0, 0, 0.05);
     }
 `;
 
