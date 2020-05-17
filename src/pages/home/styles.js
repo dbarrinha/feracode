@@ -13,16 +13,26 @@ export const Container = styled.div`
 
 export const CoverPicContent = styled.div`
   display: block;
-  height: 200px;
+  height: 300px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 0px 10px 0 rgba(0, 0, 0, 0.05);
+  transition: 1s;
+
+  @media (max-width: 768px) {
+    height: 200px;
+  }
 `;
 
 export const CoverPic = styled.img`
   display: block;
-  height: 200px;
+  height: 300px;
   width: 100%;
   resize: vertical;
   background-size: contain;
+  transition: 1s;
+  
+  @media (max-width: 768px) {
+    height: 200px;
+  }
 `;
 
 

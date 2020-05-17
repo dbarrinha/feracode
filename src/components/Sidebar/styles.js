@@ -27,8 +27,8 @@ export const Avatar = styled.img`
     overflow: hidden;
     margin-bottom: 15px;
     position: relative;
-    width: 124px;
-    height: 124px;
+    width: 154px;
+    height: 154px;
     border-radius: 20px;
 
     @media (max-width: 768px) {
