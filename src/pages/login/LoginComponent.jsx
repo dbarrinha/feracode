@@ -15,10 +15,14 @@ export default function LoginComponent(props) {
   const onSubmit = async data => {
     setIsError(false)
     signIn(data).then(res => {
-      dispatch(actionsUser.create(res));
-      localStorage.setItem("User@testeferacode",JSON.stringify(res))
-      hist.push("/home");
-    }).catch(err =>{
+      if (res.success) {
+        dispatch(actionsUser.create(res.response));
+        localStorage.setItem("User@testeferacode", JSON.stringify(res.response))
+        hist.push("/home");
+      } else {
+        setIsError(true)
+      }
+    }).catch(err => {
       setIsError(true)
     })
   }

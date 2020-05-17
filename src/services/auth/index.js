@@ -7,9 +7,15 @@ export const signIn = async ({ email, password }) => {
         user = firebase.auth().currentUser;
         console.log(user)
     } catch (error) {
-        return error
+        return ({
+            success: false,
+            response: {}
+        })
     }
-    return user;
+    return ({
+        success: true,
+        response: user
+    })
 }
 
 export const signUp = async ({ email, password, displayName, photoURL }) => {
@@ -23,12 +29,12 @@ export const signUp = async ({ email, password, displayName, photoURL }) => {
         })
         console.log(user)
     } catch (error) {
-        return({
+        return ({
             success: false,
             response: {}
         })
     }
-    return({
+    return ({
         success: true,
         response: user
     })
