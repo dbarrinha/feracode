@@ -32,8 +32,8 @@ export default function CadastroComponent(props) {
     signUp(usuario).then(res => {
       console.log(res)
       if (res.success) {
-        dispatch(actionsUser.create(res));
-        localStorage.setItem("User@testeferacode", JSON.stringify(res))
+        dispatch(actionsUser.create(res.response));
+        localStorage.setItem("User@testeferacode", JSON.stringify(res.response))
         hist.push("/home");
       } else {
         setIsError(true)

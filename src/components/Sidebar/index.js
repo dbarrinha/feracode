@@ -12,11 +12,12 @@ function Sidebar() {
   let location = useLocation()
   const dispatch = useDispatch()
   const user = useSelector(state => state.user.user);
+  
   const sair = () => {
     signOut().then(res => {
-      dispatch(actionsUser.destroy());
       localStorage.removeItem("User@testeferacode")
       hist.push('/')
+      dispatch(actionsUser.destroy());
     }).catch(err => {
       //trata erro de logout
     })
