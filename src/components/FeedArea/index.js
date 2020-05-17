@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, PostForm, PostList, PostFormFooter, TextArea, ButtonForm } from './styles';
 import Post from './Post'
+import Loader from '../../components/Loader'
 import { useSelector } from 'react-redux';
 import { newPost, getPosts } from '../../services/posts';
 
@@ -42,7 +43,7 @@ function FeedArea() {
           <ButtonForm onClick={() => enviarForm()}>Tweetar</ButtonForm>
         </PostFormFooter>
       </PostForm>
-
+      
       {posts ? (
         <PostList>
           {posts.map((post,index)=>{
@@ -50,7 +51,7 @@ function FeedArea() {
           })}
         </PostList>
       )
-        : <div></div>}
+        : <Loader label="Buscando Posts" />}
     </Container>
   );
 }

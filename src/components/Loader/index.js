@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-const animationBook = require('assets/lottie/loaderinfinit.json')
+const animationBook = require('../../assets/lottie/loaderinfinit.json')
 
 export default function LoaderCustom({ label = "", height = 180, width = 180 }) {
     const bookOptions = {
